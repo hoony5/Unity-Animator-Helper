@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c9a78f84a24e558d285b7106d9caa5, type: 3}
+  m_Name: InfantryMoveState
+  m_EditorClassIdentifier: 
+  stateNamePart: Move
+  controllers:
+  - {fileID: 9100000, guid: 04dd13f4bc9c4e74f88f06360499b624, type: 2}
+  isAnyState: 0
+  isBlendTree: 1
+  hasSpeedParameter: 1
+  speedParameterName: MovementSpeed
+  transitionData: {fileID: 11400000, guid: e3831ca5abb23d340a3f28b81af4393e, type: 2}
+  blendTreeData: {fileID: 11400000, guid: 3f6d7bc9dc54a9e4b846be1a37f1455b, type: 2}

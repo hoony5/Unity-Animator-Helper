@@ -1,0 +1,17 @@
+{
+    "name": "AnimationUtil",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8eaabf3c03f0cea44bef5744558327c9",
+        "GUID:9fed2ec03a73a98428542fe775035d61"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
