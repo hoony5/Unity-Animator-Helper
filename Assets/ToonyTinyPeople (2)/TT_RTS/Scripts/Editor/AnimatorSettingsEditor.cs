@@ -10,7 +10,6 @@ public class AnimatorSettingsEditor : Editor
 
         EditorGUILayout.BeginVertical(GUI.skin.box);
         EditorGUILayout.Space(10);
-        // 스테이트 이름
         serializedObject.DrawPropertyField("controllers"); 
         CustomEditorUtility.DrawLine(2, Color.green);   
         EditorGUILayout.Space(15);
@@ -18,17 +17,14 @@ public class AnimatorSettingsEditor : Editor
         CustomEditorUtility.DrawLine(2, Color.green);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.Space(10);
-        // 애니스테이트 연결?
         serializedObject.DrawPropertyField("isAnyState");
         EditorGUILayout.Separator();
-        // 블렌드 트리 ?
         SerializedProperty isBelndTreeCheck = serializedObject.DrawPropertyField("isBlendTree");
         EditorGUILayout.Space(10);
         EditorGUILayout.EndHorizontal();
         CustomEditorUtility.DrawLine(2, Color.green);
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.Space(10);
-        // 속도 제어 파라미터 사용
         SerializedProperty hasSpeedParameter = serializedObject.DrawPropertyField("hasSpeedParameter");
         if(hasSpeedParameter.boolValue)
         {

@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -187,6 +183,46 @@ public class AnimatorUtil : MonoBehaviour
 
         return blendTreeInController;
     }
+
+    private void RemoveAllTransitions(int layerIndex = 0)
+    {
+        foreach (AnimatorSettings settings in SettingsList)
+        {
+            RemoveAllTransitionsInternal(layerIndex, settings);
+        }
+    }
+
+    private void RemoveAllTransitionsInternal(int layerIndex, AnimatorSettings settings)
+    {
+        foreach (AnimatorController controller in settings.controllers)
+        {
+          
+            AnimatorStateMachine stateMachine = controller.layers[layerIndex].stateMachine;
+            RemoveAnyStateTransitions(stateMachine);
+            RemoveNormalStateTransitions(stateMachine);
+        }
+    }
+
+    private void RemoveAnyStateTransitions(AnimatorStateMachine stateMachine)
+    {
+        // remove any transition
+        foreach (AnimatorStateTransition transition in stateMachine.anyStateTransitions)
+        {
+            stateMachine.RemoveAnyStateTransition(transition);
+        }
+    }
+
+    private void RemoveNormalStateTransitions(AnimatorStateMachine stateMachine)
+    {
+        // other transition
+        foreach (ChildAnimatorState state in stateMachine.states)
+        {
+            foreach (AnimatorStateTransition transition in state.state.transitions)
+            {
+                state.state.RemoveTransition(transition);
+            }
+        }
+    }
     public void SetTransitions(int layerIndex = 0)
     {
         foreach (AnimatorSettings settings in SettingsList)
@@ -203,17 +239,8 @@ public class AnimatorUtil : MonoBehaviour
                 }
 
                 AnimatorState current = GetAnimatorState(stateMachine, settings.stateNamePart);
-                if (current is not null)
-                {
-                    bool isAlreadyMade = Array.Exists(current.transitions,
-                        i => i.destinationState is null || i.destinationState.name.Contains(settings.stateNamePart));
-                    if (isAlreadyMade) continue;
-                }
-                else
-                {
-                    // 없으면 건너뛴다.
-                    continue;
-                }   
+                
+                if (current is null) continue;
 
                 // 속도 제어
                 SetSpeedParameter(settings, controller, layerIndex);
@@ -269,12 +296,6 @@ public class AnimatorUtil : MonoBehaviour
 
             if(next is not null)
             {
-                // anyState 중복 판단
-                if (Array.Exists(stateMachine.anyStateTransitions, i => i.destinationState.name == state.name))
-                    continue;
-                // 일반 트랜지션 중복 판단
-                if(Array.Exists(state.transitions, i => i.destinationState.name == next.name))
-                    continue;
                 // AnyState를 사용하는가 아닌가. 
                 AnimatorStateTransition stateTransition = isAnyState && state.name.Contains(setting.targetStateNamePart)
                     ? stateMachine.AddAnyStateTransition(state)

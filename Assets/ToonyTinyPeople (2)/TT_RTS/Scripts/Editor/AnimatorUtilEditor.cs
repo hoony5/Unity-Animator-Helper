@@ -42,11 +42,10 @@ public class AnimatorUtilEditor : Editor
 
         EditorGUILayout.BeginVertical();
       
-        EditorGUILayout.Space(10);  // 파라미터
+        EditorGUILayout.Space(10);  
         parameterFoldOut = DrawFoldOut(parameterFoldOut, "Managing Parameter", parameterDatas.ApplyReorderLayoutList);
         DrawLine(2, Color.green);
         
-        // 트랜지션 데이터
         animatorSettingsFoldOut = DrawFoldOut(animatorSettingsFoldOut, "Managing State & Transition", animatorSettings.ApplyReorderLayoutList);
         DrawLine(2, Color.green);
         EditorGUILayout.BeginHorizontal();
@@ -89,7 +88,6 @@ public class AnimatorUtilEditor : Editor
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndHorizontal();
         DrawLine(2, Color.green);
-        // 실행 버튼    q
         if (GUILayout.Button("Set Up", new GUILayoutOption[]{GUILayout.Height(32)}))
         {
             data.SetParameters();

@@ -33,11 +33,9 @@ public class BlendTreeChildrenEditor : Editor
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space(10);
 
-        // 블렌드 타입
         SerializedProperty blendTreeType = serializedObject.DrawPropertyField("blendTreeType");
         CustomEditorUtility.DrawLine(2,Color.green);
         BlendTreeType typeValue = (BlendTreeType)blendTreeType.enumValueIndex;
-        // 블렌드 파라미터
         SerializedProperty parameterAxisX = serializedObject.FindProperty("parameterAxisX");
         switch (typeValue)
             {
@@ -60,7 +58,6 @@ public class BlendTreeChildrenEditor : Editor
                     throw new ArgumentOutOfRangeException(" - Not Support Direct Type - ");
             }
         CustomEditorUtility.DrawLine(2,Color.green);
-        // 리스트 그리기
         motionList.ApplyReorderLayoutList();
         CustomEditorUtility.DrawLine(2,Color.green);
         
